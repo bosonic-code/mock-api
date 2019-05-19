@@ -9,8 +9,6 @@ services:
     build:
       dockerfile: ./integration-tests/Dockerfile
       context: ../
-    networks:
-      testing_net:
 
   # Services
   api:
@@ -19,23 +17,10 @@ services:
     env_file: ./test.env
     depends_on:
       - "twitch-mock"
-    networks:
-      testing_net:
   
 
   # Twitch API mock
   twitch-mock:
     container_name: test_twitch-mock
-    image: bosonic-code/api-mock
-    env_file: ./api-mock.env
-    networks:
-      testing_net:
-        aliases:
-          - api.twitch.tv
-
-networks:
-    testing_net:
-        ipam:
-            driver: default
-            config:
-                - subnet: 172.28.0.0/16
+    image: bosonic/mock-api
+    env_file: ./mock-api.env

@@ -25,6 +25,22 @@
 #   unused-packages = true
 
 
+[[constraint]]
+  branch = "master"
+  name = "github.com/bosonic-code/mock-api"
+
+[[constraint]]
+  name = "github.com/gorilla/handlers"
+  version = "1.4.0"
+
+[[constraint]]
+  name = "github.com/gorilla/mux"
+  version = "1.7.2"
+
+[[constraint]]
+  name = "github.com/nicklaw5/helix"
+  version = "0.5.1"
+
 [prune]
   go-tests = true
   unused-packages = true

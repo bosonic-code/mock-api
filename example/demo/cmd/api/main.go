@@ -12,15 +12,17 @@ import (
 )
 
 var (
-	port           = os.Getenv("API_PORT")
-	twitchClientID = os.Getenv("TWITCH_CLIENT_ID")
+	port              = os.Getenv("API_PORT")
+	twitchClientID    = os.Getenv("TWITCH_CLIENT_ID")
+	twitchAPIBaseURL  = MustGetURL("TWITCH_API_BASE_URL")
+	twitchAuthBaseURL = MustGetURL("TWITCH_AUTH_BASE_URL")
 )
 
 func main() {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/users/{id}/is-streaming", statusHandler).Methods(http.MethodGet)
+	router.HandleFunc("/users/{id}/is-streaming", isStreaming).Methods(http.MethodGet)
 
 	loggedHandler := handlers.LoggingHandler(os.Stderr, router)
 
@@ -34,10 +36,8 @@ func main() {
 	log.Fatal(server.ListenAndServe())
 }
 
-func statusHandler(w http.ResponseWriter, r *http.Request) {
-	client, err := helix.NewClient(&helix.Options{
-		ClientID: twitchClientID,
-	})
+func isStreaming(w http.ResponseWriter, r *http.Request) {
+	client, err := getHelixClient()
 
 	if err != nil {
 		log.Println(err)
@@ -51,15 +51,11 @@ func statusHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		w.WriteHeader(500)
-		log.Println(err)
 		return
 	}
 
 	if resp.StatusCode != 200 {
 		w.WriteHeader(500)
-		log.Println(resp.StatusCode)
-		log.Println(resp.ErrorMessage)
-		log.Println(resp.ErrorStatus)
 		return
 	}
 

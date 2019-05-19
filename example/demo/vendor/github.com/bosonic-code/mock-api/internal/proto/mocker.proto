@@ -1,0 +1,28 @@
+
+syntax = "proto3";
+
+package proto;
+
+service Mocker {
+  rpc Handle (HandleRequest) returns (HandleResponse) {}
+}
+
+message HandleRequest {
+  Request request = 1;
+  Response response = 2;
+}
+
+message HandleResponse {
+  string error = 1;
+}
+
+message Request {
+  string method = 1;
+  string path = 2;
+  map<string,string> query = 3;
+}
+
+message Response {
+  int32 status = 1;
+  string body = 2;
+}
