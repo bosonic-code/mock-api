@@ -3,14 +3,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:471bbb8ea8adf94f24027ef850d55e2755489a1978ae309ace3bebd95f45f244"
+  digest = "1:8852df999ef2fc49fe60c5c6cc9db6edb19771b026747cfab5b6558b20249233"
   name = "github.com/bosonic-code/mock-api"
-  packages = [
-    "internal/proto",
-    "mocker",
-  ]
+  packages = ["mocker"]
   pruneopts = "UT"
-  revision = "ae399fb768012c531818887d353c42eace8ae704"
+  revision = "f9a89d1eceba30ea6245347a6b01133e8bdc4894"
 
 [[projects]]
   digest = "1:239c4c7fd2159585454003d9be7207167970194216193a8a210b8d29576f19c9"

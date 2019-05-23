@@ -4,7 +4,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func NewClient(endpoint string) (*MockerClient, error) {
+func NewClient(endpoint string) (MockerClient, error) {
 	// Set up a connection to the server.
 	conn, err := grpc.Dial(endpoint, grpc.WithInsecure())
 	if err != nil {
@@ -13,5 +13,5 @@ func NewClient(endpoint string) (*MockerClient, error) {
 	}
 	cl := NewMockerClient(conn)
 
-	return &cl, nil
+	return cl, nil
 }

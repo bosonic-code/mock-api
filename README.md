@@ -111,13 +111,13 @@ https://github.com/bosonic-code/mock-api/blob/master/example/demo/integration-te
 ```
 
 var (
-	mo *mocker.Client
+	mo mocker.MockerClient
 )
 
 func init() {
 	var err error
 
-	if mo, err = mocker.Create("twitch-mock:9999"); err != nil {
+	if mo, err = mocker.NewClient("twitch-mock:9999"); err != nil {
 		log.Fatalf("Unable to create mock client %v", err)
 	}
 }
@@ -135,9 +135,9 @@ https://github.com/bosonic-code/mock-api/blob/master/example/demo/integration-te
 
 func TestGetStreamerStatus(t *testing.T) {
 	var (
-		// This describes  what  we expect the request to
+	  // This describes  what  we expect the request to
 		// twitch to look like
-		request = mocker.Request{
+		request = mocker.RequestMatcher{
 			Method: http.MethodGet,
 			Path:   "/helix/streams",
 			Query: map[string]string{
@@ -147,7 +147,7 @@ func TestGetStreamerStatus(t *testing.T) {
 		}
 
 		// This is how we expect twitch to respond
-		response = mocker.Response{
+		response = mocker.MatcherResponse{
 			Status: http.StatusOK,
 			Body: `
 		{
@@ -162,10 +162,19 @@ func TestGetStreamerStatus(t *testing.T) {
 	)
 
 
-    // Register the scenario in the server
-	if err := mo.Handle(request, response); err != nil {
+
+	// Register the scenario in the server
+	addHandlerRequest := &mocker.AddHandlerRequest{
+		RequestMatcher: &request,
+		Response:       &response}
+
+	if _, err := mo.AddHandler(
+		context.TODO(),
+		addHandlerRequest,
+	); err != nil {
 		log.Fatalf("Error setting up handle %v", err)
 	}
+
     ...
 ```
 
