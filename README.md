@@ -213,5 +213,5 @@ https://github.com/bosonic-code/mock-api/blob/master/example/demo/integration-te
 
 ## Configuring responses
 
-Currently - you can configure the server to match requests by Method, Path, Headers and Query. See our tests for example usage: https://github.com/bosonic-code/mock-api/blob/master/cmd/server/server_test.go
+Currently - you can configure the server to match requests by Method, Path, Headers and Query. See our tests for example usage: https://github.com/bosonic-code/mock-api/blob/master/cmd/server/mock_server_test.go
 
