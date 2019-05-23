@@ -12,12 +12,12 @@ import (
 )
 
 var (
-	port    = os.Getenv("API_PORT")
-	comPort = os.Getenv("COM_PORT")
+	port     = os.Getenv("API_PORT")
+	grpcPort = os.Getenv("GRPC_PORT")
 )
 
 func main() {
-	mockServer := &Server{}
+	mockServer := &MockServer{}
 	httpServer := &http.Server{
 		Addr:    fmt.Sprintf("%v:%v", "localhost", port),
 		Handler: mockServer,
@@ -31,18 +31,18 @@ func main() {
 		}
 	}()
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", comPort))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%v", grpcPort))
 
 	if err != nil {
-		log.Fatalf("Mockserver failed to listen: %v", err)
+		log.Fatalf("GRPC server failed to listen: %v", err)
 	}
 
-	log.Printf("Mockserver listening at %v", comPort)
+	log.Printf("GRPC server listening at %v", grpcPort)
 
 	s := grpc.NewServer()
 	proto.RegisterMockerServer(s, mockServer)
 
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("Mockserver failed to serve: %v", err)
+		log.Fatalf("GRPC server failed to serve: %v", err)
 	}
 }

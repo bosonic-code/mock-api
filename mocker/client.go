@@ -25,24 +25,26 @@ func Create(endpoint string) (*Client, error) {
 	}, nil
 }
 
-func (c *Client) Handle(req Request, resp Response) error {
-	_, err := c.cl.Handle(context.TODO(), &proto.HandleRequest{
-		Request: &proto.Request{
-			Method:  req.Method,
-			Path:    req.Path,
-			Query:   req.Query,
-			Headers: mkHeaders(req.Headers),
-		},
-		Response: &proto.Response{
-			Status: resp.Status,
-			Body:   resp.Body,
-		},
-	})
+func (c *Client) AddHandler(req Request, resp Response) error {
+	_, err := c.cl.AddHandler(context.TODO(),
+		&proto.AddHandlerRequest{
+			RequestMatcher: &proto.RequestMatcher{
+				Method:  req.Method,
+				Path:    req.Path,
+				Query:   req.Query,
+				Body:    req.Body,
+				Headers: buildHeaderValues(req.Headers),
+			},
+			Response: &proto.MatcherResponse{
+				Status: resp.Status,
+				Body:   resp.Body,
+			},
+		})
 
 	return err
 }
 
-func mkHeaders(h map[string][]string) map[string]*proto.HeaderValue {
+func buildHeaderValues(h map[string][]string) map[string]*proto.HeaderValue {
 	res := make(map[string]*proto.HeaderValue, len(h))
 	for k, v := range h {
 		res[k] = &proto.HeaderValue{Value: v}
