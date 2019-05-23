@@ -3,14 +3,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:b9cd3d34fbe720154265244e3476f5b844a98015c11d63458237f6eece5f5626"
+  digest = "1:471bbb8ea8adf94f24027ef850d55e2755489a1978ae309ace3bebd95f45f244"
   name = "github.com/bosonic-code/mock-api"
   packages = [
     "internal/proto",
     "mocker",
   ]
   pruneopts = "UT"
-  revision = "08f090a5c5388a0ede1f21306d4bf53065d2684f"
+  revision = "ae399fb768012c531818887d353c42eace8ae704"
 
 [[projects]]
   digest = "1:239c4c7fd2159585454003d9be7207167970194216193a8a210b8d29576f19c9"
@@ -43,12 +43,12 @@
   version = "v1.7.2"
 
 [[projects]]
-  digest = "1:a2bf5d560740cf1a6ed3d403c2f37370b526778df92724a3ceefe0d53925c5d1"
+  digest = "1:3165b1be39e643640cef0252e397e0bb5c250d2af233750aea35247809d613a9"
   name = "github.com/nicklaw5/helix"
   packages = ["."]
   pruneopts = "UT"
-  revision = "30ddc8740dc76a5c64925deedb1b553fe1f23df6"
-  version = "v0.5.1"
+  revision = "1ffbcec5d9018d07333959272c8e8654a70b2e50"
+  version = "v0.5.2"
 
 [[projects]]
   branch = "master"
@@ -64,15 +64,15 @@
     "trace",
   ]
   pruneopts = "UT"
-  revision = "3ec19112720433827bbce8be9342797f5a6aaaf9"
+  revision = "f3200d17e092c607f615320ecaad13d87ad9a2b3"
 
 [[projects]]
   branch = "master"
-  digest = "1:3851a6d548ec5a808e396408f03a30b8d05ef4426db7ad8688f639b2d88b47bd"
+  digest = "1:dce1d6c001ac752c61f5e255666ed388d78ff2089914f7067c7d6b6ff49e6420"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "61b9204099cb1bebc803c9ffb9b2d3acd9d457d9"
+  revision = "0e01d883c5c5e3a1741118a9962f68d71b0a6ed4"
 
 [[projects]]
   digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"
@@ -105,10 +105,10 @@
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
   pruneopts = "UT"
-  revision = "bb713bdc0e5239f2b68e560efbe1c701a6fe78f9"
+  revision = "c2c4e71fbf6989c3e46a18d65cb88c288f8a3a55"
 
 [[projects]]
-  digest = "1:707c3a5d10ed430ea767d73df122d9eb3dfb6312bbacc9f2e39204390686d1d0"
+  digest = "1:c69a4c19c4f241e6b75ad65c5e7a1c4eec5705ae504624df4eb6fb659c2df46c"
   name = "google.golang.org/grpc"
   packages = [
     ".",
@@ -145,8 +145,8 @@
     "tap",
   ]
   pruneopts = "UT"
-  revision = "25c4f928eaa6d96443009bd842389fb4fa48664e"
-  version = "v1.20.1"
+  revision = "869adfc8d5a43efc0d05780ad109106f457f51e4"
+  version = "v1.21.0"
 
 [solve-meta]
   analyzer-name = "dep"

@@ -1,7 +1,7 @@
 build: server 
 
 proto: 
-	protoc -I internal/proto internal/proto/*.proto --go_out=plugins=grpc:internal/proto
+	protoc -I mocker mocker/*.proto --go_out=plugins=grpc:mocker
 
 dep:
 	dep ensure

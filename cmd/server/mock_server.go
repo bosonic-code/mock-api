@@ -5,20 +5,20 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/bosonic-code/mock-api/internal/proto"
+	"github.com/bosonic-code/mock-api/mocker"
 )
 
 type MockServer struct {
-	handlers []*proto.AddHandlerRequest
+	handlers []*mocker.AddHandlerRequest
 }
 
-func (s *MockServer) AddHandler(ctx context.Context, in *proto.AddHandlerRequest) (*proto.AddHandlerResponse, error) {
+func (s *MockServer) AddHandler(ctx context.Context, in *mocker.AddHandlerRequest) (*mocker.AddHandlerResponse, error) {
 	if s.handlers == nil {
-		s.handlers = make([]*proto.AddHandlerRequest, 0)
+		s.handlers = make([]*mocker.AddHandlerRequest, 0)
 	}
 
 	s.handlers = append(s.handlers, in)
-	return &proto.AddHandlerResponse{}, nil
+	return &mocker.AddHandlerResponse{}, nil
 }
 
 func (s *MockServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +33,7 @@ func (s *MockServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 }
 
-func match(r *http.Request, req *proto.RequestMatcher) bool {
+func match(r *http.Request, req *mocker.RequestMatcher) bool {
 	if req.Path != r.URL.Path {
 		return false
 	}

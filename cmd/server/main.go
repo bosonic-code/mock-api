@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/bosonic-code/mock-api/internal/proto"
+	"github.com/bosonic-code/mock-api/mocker"
 	"google.golang.org/grpc"
 )
 
@@ -40,7 +40,7 @@ func main() {
 	log.Printf("GRPC server listening at %v", grpcPort)
 
 	s := grpc.NewServer()
-	proto.RegisterMockerServer(s, mockServer)
+	mocker.RegisterMockerServer(s, mockServer)
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("GRPC server failed to serve: %v", err)

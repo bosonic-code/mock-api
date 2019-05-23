@@ -70,7 +70,7 @@ func TestGetStreamerStatus(t *testing.T) {
 		}
 	)
 
-	if err := mo.Handle(request, response); err != nil {
+	if err := mo.AddHandler(request, response); err != nil {
 		log.Fatalf("Error setting up handle %v", err)
 	}
 

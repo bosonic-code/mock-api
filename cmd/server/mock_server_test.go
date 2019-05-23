@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/bosonic-code/mock-api/internal/proto"
+	"github.com/bosonic-code/mock-api/mocker"
 )
 
 // TestMatchers runs sets up a single handler in a server
@@ -23,7 +23,7 @@ func TestMatchers(t *testing.T) {
 		// name of sample (so we can easily identify failed samples)
 		name string
 		// The handler to initialize the server w/
-		handler *proto.AddHandlerRequest
+		handler *mocker.AddHandlerRequest
 		// The request we want to test
 		r *http.Request
 		// Asserts for response
@@ -34,11 +34,11 @@ func TestMatchers(t *testing.T) {
 	samples := []sample{
 		sample{
 			name: "Success case - match path",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/success",
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 					Body:   "Hello World",
 				},
@@ -54,11 +54,11 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Fail case - match path",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/success",
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 					Body:   "Hello World",
 				},
@@ -74,14 +74,14 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Success case - match path + query",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/success",
 					Query: map[string]string{
 						"a": "b",
 					},
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 					Body:   "Hello World",
 				},
@@ -98,14 +98,14 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Fail case - match path + query",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/success",
 					Query: map[string]string{
 						"a": "b",
 					},
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 					Body:   "Hello World",
 				},
@@ -122,14 +122,14 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Success case - match path + headers",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/success",
-					Headers: map[string]*proto.HeaderValue{
-						"a": &proto.HeaderValue{Value: []string{"b", "c"}},
+					Headers: map[string]*mocker.HeaderValue{
+						"a": &mocker.HeaderValue{Value: []string{"b", "c"}},
 					},
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 					Body:   "Hello World",
 				},
@@ -148,14 +148,14 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Fail case - match path + headers",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/success",
-					Headers: map[string]*proto.HeaderValue{
-						"a": &proto.HeaderValue{Value: []string{"b", "c"}},
+					Headers: map[string]*mocker.HeaderValue{
+						"a": &mocker.HeaderValue{Value: []string{"b", "c"}},
 					},
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 					Body:   "Hello World",
 				},
@@ -174,12 +174,12 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Success case - match path + http Method",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path:   "/update",
 					Method: http.MethodPut,
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 				},
 			},
@@ -194,12 +194,12 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Failure case - match path + http method",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path:   "/update",
 					Method: http.MethodPut,
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusOK,
 				},
 			},
@@ -214,12 +214,12 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Success case - match path + payload ",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/create",
 					Body: `{"number":1}`,
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusCreated,
 					Body:   `{"result":"good"}`,
 				},
@@ -236,12 +236,12 @@ func TestMatchers(t *testing.T) {
 
 		sample{
 			name: "Fail case - match path + payload",
-			handler: &proto.AddHandlerRequest{
-				RequestMatcher: &proto.RequestMatcher{
+			handler: &mocker.AddHandlerRequest{
+				RequestMatcher: &mocker.RequestMatcher{
 					Path: "/create",
 					Body: `{"number":1}`,
 				},
-				Response: &proto.MatcherResponse{
+				Response: &mocker.MatcherResponse{
 					Status: http.StatusCreated,
 					Body:   `{"result":"good"}`,
 				},
