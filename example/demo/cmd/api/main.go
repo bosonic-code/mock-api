@@ -27,7 +27,7 @@ func main() {
 	loggedHandler := handlers.LoggingHandler(os.Stderr, router)
 
 	server := &http.Server{
-		Addr:    fmt.Sprintf("%v:%v", "localhost", port),
+		Addr:    fmt.Sprintf(":%v", port),
 		Handler: loggedHandler,
 	}
 

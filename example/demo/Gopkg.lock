@@ -3,11 +3,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:8852df999ef2fc49fe60c5c6cc9db6edb19771b026747cfab5b6558b20249233"
+  digest = "1:541989a49ce915b94debdbe9b0d6e932e69a0997e0c1fa3f8e02a3ca6d722581"
   name = "github.com/bosonic-code/mock-api"
   packages = ["mocker"]
   pruneopts = "UT"
-  revision = "f9a89d1eceba30ea6245347a6b01133e8bdc4894"
+  revision = "ce4737016f928efd978ff1559578f029de245be8"
 
 [[projects]]
   digest = "1:239c4c7fd2159585454003d9be7207167970194216193a8a210b8d29576f19c9"
@@ -65,11 +65,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:dce1d6c001ac752c61f5e255666ed388d78ff2089914f7067c7d6b6ff49e6420"
+  digest = "1:668e8c66b8895d69391429b0f64a72c35603c94f364c94d4e5fab5053d57a0b6"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "0e01d883c5c5e3a1741118a9962f68d71b0a6ed4"
+  revision = "5219a1e1c5f8dfaadf9d314b1289417a73674973"
 
 [[projects]]
   digest = "1:8d8faad6b12a3a4c819a3f9618cb6ee1fa1cfc33253abeeea8b55336721e3405"

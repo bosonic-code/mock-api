@@ -19,7 +19,7 @@ var (
 func main() {
 	mockServer := &MockServer{}
 	httpServer := &http.Server{
-		Addr:    fmt.Sprintf("%v:%v", "localhost", port),
+		Addr:    fmt.Sprintf(":%v", port),
 		Handler: mockServer,
 	}
 

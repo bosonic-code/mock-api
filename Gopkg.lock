@@ -41,10 +41,9 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:aa51a5bed0c7c26aadfcc5bf5b2b62c0f43032af5d786a02247f87dfce23cb06"
+  digest = "1:d74f0c0ed416a7a676ef391036a62ecb207b5057636666b3a364397b7b5af3aa"
   name = "golang.org/x/net"
   packages = [
-    "context",
     "http/httpguts",
     "http2",
     "http2/hpack",
@@ -145,8 +144,9 @@
     "github.com/gorilla/handlers",
     "github.com/gorilla/mux",
     "github.com/nicklaw5/helix",
-    "golang.org/x/net/context",
     "google.golang.org/grpc",
+    "google.golang.org/grpc/codes",
+    "google.golang.org/grpc/status",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
